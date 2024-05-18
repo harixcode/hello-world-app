@@ -1,19 +1,10 @@
-import tkinter as tk
+from flask import Flask
 
-# Create the main application window
-root = tk.Tk()
+app = Flask(__name__)
 
-# Set the title of the window
-root.title("Hello World App")
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
 
-# Set the size of the window
-root.geometry("300x100")
-
-# Create a label widget with "Hello World" text
-hello_label = tk.Label(root, text="Hello, World!")
-
-# Pack the label widget into the window
-hello_label.pack(pady=20)
-
-# Run the application
-root.mainloop()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=4444)
