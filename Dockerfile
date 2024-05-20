@@ -1,18 +1,12 @@
+# syntax=docker/dockerfile:1
 
-# Use the official Python image from the Docker Hub
-FROM python:3.9-slim
+FROM python:3.8-slim-buster
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
 
-# Make port 5000 available to the world outside this container
-EXPOSE 4444
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
